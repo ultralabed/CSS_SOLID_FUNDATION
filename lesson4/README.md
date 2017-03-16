@@ -1,0 +1,340 @@
+ /* this is for IE6 */ /* This is a comment, for telling what the css is for. */
+
+
+body { /* Element Type Selector */
+  font-family: Arial, sans-serif; /* this line is a declaration */
+  /* Property */ /* Values */
+}
+
+/* Class Type Selector, matches HTML element with class="navigation" */
+.navigation {
+  width: 1000px;
+  margin: 0 auto;
+}
+
+/* ID Selector, matches HTML element with id="navigation"  */
+#navigation { /* Slow */
+  width: 1000px;
+  margin: 0 auto;
+}
+
+/* Universal Selector, the asterisk character is the universal selector */
+.navigation ul * { /* Slow */
+  width: 100px;
+  float: left;
+}
+
+/* Attribute Selector, match element with style="[anything]" */
+p[style] {
+  color: #1e1e1e;
+}
+
+/* Attribute Selector, matches input elements with type="text" */
+input[type="text"] {
+  border: solid 1px #ccc;
+}
+
+/* Pseudo-Class, the word "hover" along with the preceding colon is the pseudo-class */
+/* Match elements that actually exist */
+a:hover { /* More example, :visited, :focus, and :first-child */
+  text-decoration: none;
+}
+
+/* Pseudo-Element, CSS2 "first-letter" including the preceding colon is the pseudo-element */
+/* Target elements that can change depending on the actual html. */
+p:first-letter {
+  display: block;
+  float: left;
+  margin: 0 5px 5px 0;
+}
+
+/* Pseudo-Element, CSS3 pseudo-elements have double colons */
+::selection {
+  background: green;
+}
+
+/* Combinator, In all 4 examples */
+/* whatever appears between "div" and "p" is a combinator */
+/* in the first example, the combinator is a space character */
+div p { /* descendant selectors (with a space character) */
+  color: #222;
+}
+
+div>p { /* child selectors (with the “>” character) */
+  color: #333;
+}
+
+div+p { /* adjacent sibling selectors (with the “+” character) */
+  color: #444;
+}
+
+div~p { /* general sibling selectors (with the “~” character). */
+  color: #555;
+}
+
+/* At-Rule, an instruction given in a CSS document using the @ character */
+@import url(secondary.css);
+
+@media print {
+  #container {
+    width: 500px;
+  }
+}
+
+<h1>Heading Level 1</h1>
+<h2>Heading Level 2</h2>
+<h3>Heading Level 3</h3>
+<h4>Heading Level 4</h4>
+<h5>Heading Level 5</h5>
+<h6>Heading Level 6</h6>
+
+<p>Steve Jobs was a co-founder and longtime chief executive officer at Apple. On June 12, 2005, Steve gave the commencement address at Stanford University.</p>
+
+<p>In his address Steve urged graduates to follow their dreams and, despite any setbacks, to never give up&ndash;advice which he sincerely took to heart.</p>
+
+<!-- Strong importance -->
+<p><strong>Caution:</strong> Falling rocks.</p>
+
+<!-- Stylistically offset -->
+<p>This recipe calls for <b>bacon</b> and <b>baconnaise</b>.</p>
+
+<!-- Stressed emphasis -->
+<p>I <em>love</em> Chicago!</p>
+
+<!-- Alternative voice or tone -->
+<p>The name <i>Shay</i> means a gift.</p>
+
+<br>
+
+<header> header is used to identify the top of a page, article, section, or other segment of a page </header>
+<br>
+<nav> Navigation is reserved for primary navigation sections.</nav>
+<br>
+<a> a is for Miscellaneous one-off links </a>
+<br>
+<article>The article element is used to identify a section of independent, self-contained content that may be independently distributed or reused.</article>
+<br>
+
+<section>section element is used to identify a thematic grouping of content, which generally, but not always, includes a heading.</section>
+Deciding Between "article", "section", or "div"" Elements
+div- solely for styling purpose
+article-content adds to document outline and can be independently
+section-content adds to document outline represents a thematic group of content
+<br>
+
+<aside> aside sidebars, inserts, or brief explanations, that is tangentially related to the content surrounding it</aside>
+<br>
+<footer> footer identifies the closing or end of a page, article, section, or other segment of a page</footer>
+
+
+
+
+
+
+#### Calculating Specificity ####
+
+The type selector has the lowest specificity weight and holds a point value of 0-0-1.
+
+
+The class selector has a medium specificity weight and holds a point value of 0-1-0.
+
+
+Lastly, the ID selector has a high specificity weight and holds a point value of 1-0-0. 
+
+<!-- ID selector over Type selector Example -->
+<p id="food">...</p>  color will be green rather than orange.
+
+#food {
+  background: green;
+}
+p {
+  background: orange;
+}
+<!-- END Example -->
+
+
+#### Combining Selectors ####
+
+<!-- ID selector over Type selector Example -->
+<div class="hotdog">
+  <p>...</p> background-color brown
+  <p>...</p> background-color brown
+  <p class="mustard">...</p> background-color yellow
+</div>
+
+.hotdog p {
+  background: brown;
+}
+.hotdog p.mustard {
+  background: yellow;
+}
+
+<!-- END Example -->
+
+
+<!-- Color Example -->
+
+color name
+.task {
+  background: red;
+}
+.count {
+  background: maroon;
+}
+
+hex
+.task {
+  background: #800000;
+}
+.count {
+  background: #ff0;
+}
+
+rgb and rgba(opaque percent 0 is transparent, 100 is 100% opaque)
+.task {
+  background: rgba(128, 0, 0);
+}
+.count {
+  background: rgba(255, 255, 0, .25);
+}
+
+
+hsl and hsla
+.task {
+  background: hsl(0, 100%, 25%);
+}
+.count {
+  background: hsla(60, 100%, 50%, .25);
+}
+
+<!-- END Example -->
+
+<!-- Length Example -->
+
+Lengths
+absolute length
+
+
+pixel -> px
+1/96th inch
+
+Relative Lengths
+
+.col {
+  width: 50%; parents 50%;
+}
+
+.banner {
+  font-size: 14px;
+  width: 5em; number times closest font-size, or closest parent font-size
+}
+<!-- END Example -->
+
+
+#### Display ####
+<!-- Display Example -->
+
+display: block; <!-- Inline-level elements occupy only the width their content requires and line up on the same line  -->
+
+display: inline; <!-- block-level elements occupy any available width, regardless of their content, and begin on a new line -->
+
+display: inline-block; <!-- allow an element to behave as a block-level element, accepting all box model properties, and the element will be displayed in line with other elements, and it will not begin on a new line by default. -->
+
+display: none; <!-- completely hide an element and render the page as if that element doesn’t exist, Any elements nested within this element will also be hidden. -->
+
+<!-- END Example -->
+
+
+#### Box Model ####
+<!-- Length Example -->
+##### Every element on a page is a rectangular box. #####
+box model
+width -> margin-right + border-right + padding-right + width + padding-left + border-left + margin-left
+height -> margin-top + border-top + padding-top + height + padding-bottom + border-bottom + margin-bottom
+
+div {
+  margin: 20px; <!-- block: all attribute, inline: left & right -->
+  border: 6px solid #949599;
+  padding: 20px;  <!-- block: all attribute, inline: all attribute -->
+                  <!-- vertical padding may blend into the line above or below the given element, but it will be displayed. -->
+  width: 400px; <!--  non-inline element -->
+  height: 100px; <!--  non-inline element -->
+}
+
+Width: 492px = 20px + 6px + 20px + 400px + 20px + 6px + 20px
+Height: 192px = 20px + 6px + 20px + 100px + 20px + 6px + 20px
+
+##### Margin and Padding #####
+
+div {
+  margin: 20px; <!-- All four, top right bottom left -->
+  margin: 10px 20px; <!-- (top, bottom), (right, left)  -->
+  margin: 10px 20px 0 15px; <!-- top, right, bottom, left  -->
+  margin-top: 10px;
+  margin-bottom: 0px;
+  margin-right: 20px;
+  margin-left: 15px;
+}
+
+##### Border #####
+
+div {
+  border: 6px solid #949599;
+        width style color
+
+  border-width: 12px;
+
+  border-bottom: 6px solid #949599;
+               width style color
+
+  border-bottom-width: 12px;
+}
+
+div {
+  border-radius: 5px;
+
+  border-radius: 50%;  circle
+
+  border-radius: 15px 75px;
+              (top-left/bottom-right,  top-right/bottom-left)
+
+  border-radius: 15px 75px 15px 75px;
+         (top-left, top-right, bottom-right, bottom-left)
+
+  border-top-right-radius: 5px;
+}
+
+##### css3 box-sizing #####
+1. content-box
+2. padding-box
+3. border-box
+###### content-box ######
+
+div {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+###### padding-box ######
+div {
+  box-sizing: padding-box;
+  width: 400px;
+  margin: 5px;
+  border: 10px;
+  padding: 20px;
+}
+Actual width is 430px = 5+10+400+10+5;
+
+###### border-box ######
+div {
+  box-sizing: border-box;
+  width: 400px;
+  margin: 5px;
+  border: 10px;
+  padding: 20px;
+}
+Actual width is 410px = 5+400+5;
+
+
+<!-- END Example -->
