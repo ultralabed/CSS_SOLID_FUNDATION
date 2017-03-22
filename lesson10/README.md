@@ -36,7 +36,7 @@ input[type="text"] {
 
 /* Pseudo-Class, the word "hover" along with the preceding colon is the pseudo-class */
 /* Match elements that actually exist */
-a:hover { /* More example, :visited, :focus, and :first-child */
+a:hover { /* More example, :visited, :focus, and :first-child :last-child :nth-child(even) */
   text-decoration: none;
 }
 
@@ -814,4 +814,90 @@ border, width, height
 ##### File Input #####
 <input type="file" name="file">
 
+##### Table #####
+<table>
+  <caption>Design and Front-End Development Books</caption>
+  <thead>
+    <tr>
+      <th scope="col" >Item</th>
+      <th scope="col">Availability</th>
+      <th scope="col">Qty</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Don&#8217;t Make Me Think by Steve Krug</td>
+      <td>In Stock</td>
+      <td>1</td>
+      <td>$30.02</td>
+    </tr>
+    <tr>
+      <td>A Project Guide to UX Design by Russ Unger &#38; Carolyn Chandler</td>
+      <td>In Stock</td>
+      <td>2</td>
+      <td>$52.94 ($26.47 &#215; 2)</td>
+    </tr>
+    <tr>
+      <td>Introducing HTML5 by Bruce Lawson &#38; Remy Sharp</td>
+      <td>Out of Stock</td>
+      <td>1</td>
+      <td>$22.23</td>
+    </tr>
+    <tr>
+      <td>Bulletproof Web Design by Dan Cederholm</td>
+      <td>In Stock</td>
+      <td>1</td>
+      <td>$30.17</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="3">Subtotal</td>
+      <td>$135.36</td>
+    </tr>
+    <tr>
+      <td colspan="3">Tax</td>
+      <td>$13.54</td>
+    </tr>
+    <tr>
+      <td colspan="3">Total</td>
+      <td>$148.90</td>
+    </tr>
+  </tfoot>
+</table>
 
+table head
+  table row
+  table header
+table body
+  table row
+  table data
+table footer
+  table row
+  table data
+caption - for heading of the table
+
+##### Table Border Collapse #####
+table {
+  border-collapse: collapse; // prevent border to stack up
+  
+  border-collapse: separate; // allow border to stack up
+  border-spacing: 4px or 5px 10px; // with spacing of 4px, horizontal then vertical
+}
+th,
+td {
+  border: 1px solid #cecfd5;
+  padding: 10px 15px;
+}
+
+##### Table coloumn span #####
+  <thead>
+    <tr>
+      <th scope="col" colspan="2">Item</th>
+      <th scope="col">Qty</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  vertical-align work on inline, table-cell only
+  vertical-align don't work on block, inline-block or element levels
