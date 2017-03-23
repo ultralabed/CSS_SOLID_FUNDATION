@@ -234,9 +234,9 @@ Relative Lengths
 #### Display ####
 <!-- Display Example -->
 
-display: block; <!-- Inline-level elements occupy only the width their content requires and line up on the same line  -->
+display: inline; <!-- Inline-level elements occupy only the width their content requires and line up on the same line  -->
 
-display: inline; <!-- block-level elements occupy any available width, regardless of their content, and begin on a new line -->
+display: block; <!-- block-level elements occupy any available width, regardless of their content, and begin on a new line -->
 
 display: inline-block; <!-- allow an element to behave as a block-level element, accepting all box model properties, and the element will be displayed in line with other elements, and it will not begin on a new line by default. -->
 
@@ -900,4 +900,582 @@ td {
     </tr>
   </thead>
   vertical-align work on inline, table-cell only
-  vertical-align don't work on block, inline-block or element levels
+  vertical-align don't work on block, inline-block or element 
+  
+
+  ## Advanced Html ##
+
+  Start thinking of websites as systems
+
+### Performance Driven Selectors ###
+Keep Selectors Short
+
+/* Bad */
+header nav ul li a {...}
+
+/* Good */
+.primary-link {...}  // No need to identify parent elements.
+
+/* Bad */
+button strong span {...}
+button strong span .callout {...}
+
+/* Good */
+button span {...}  // Reduce overly specific selector
+button .callout {...} // Give strenght to all selectors
+
+### Key Selector ###
+selectors are rendered from right to left
+
+/* Bad */
+#container header nav {...}
+
+/* Good */
+.primary-nav {...}
+
+/* Bad */
+article.feat-post {...}
+
+/* Good */
+.feat-post {...}
+
+### Reusable Code ###
+/* Bad */
+.news {
+  background: #eee;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .25);
+}
+.social {
+  background: #eee;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .25);
+}
+
+/* Good */
+.news,
+.social {
+  background: #eee;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .25);
+}
+
+/* Even Better */
+.modal {
+  background: #eee;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .25);
+}
+
+### gzip Compression ###
+.htaccess file needs to be added to the root directory of the web server, labeling the specific files to be gzipped. 
+only work on Apache web servers, nginx can be set up, too.
+
+### Image Compression ###
+Mac ImageOptim
+Windows PNGGauntlet
+
+Width and Height decide how images should be compressed.
+
+### Reduce HTTP Requests ###
+<!-- Bad -->
+<link href="css/reset.css" rel="stylesheet">
+<link href="css/base.css" rel="stylesheet">
+<link href="css/site.css" rel="stylesheet">
+
+<!-- Good -->
+<link href="css/styles.css" rel="stylesheet">
+
+css and body can be loaded synchronously, js can load one at a time only and stop other things.
+
+
+### Image Sprites ###
+li span {
+  background: url("sprite.png") 0 0 no-repeat;
+  color: transparent;
+  display: block;
+  font: 0/0 a;
+  height: 16px;
+  width: 16px;
+}
+.italic {
+  background-position: -16px 0; //left top
+}
+.underline {
+  background-position: -32px 0;
+}
+.size {
+  background-position: -48px 0;
+}
+
+### Image Data URI ###
+div {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAICAYAAADA+m62AAAAPUlEQVQYV2NkQAO6m73+X/bdxogujiIAU4RNMVwhuiQ6H6wQl3XI4oy4FMHcCJPHcDS6J2A2EqUQpJhohQAyIyYy0nBAGgAAAABJRU5ErkJggg==") repeat;
+}
+
+### Cache Common Files ###
+ExpiresByType text/css "access plus 1 year"
+ExpiresByType application/javascript "access plus 1 year"
+versioning frequently changed css/js files.
+
+### Containing Floats ###
+Document Object Mode - an API for HTML and XML documents which provides their structural representation.
+parent and child relationship or sibling relationship for elements
+
+<div class="box-set">
+  <figure class="box">Box 1</figure>
+  <figure class="box">Box 2</figure>
+  <figure class="box">Box 3</figure>
+  <br>
+</div>
+
+.box-set,
+.box {
+  border-radius: 6px;
+}
+.box-set {
+  background: #eaeaed;
+  overflow: auto/hidden;  // This can fix parent height 0
+}
+.box {
+  background: #2db34a;
+  float: left;
+  margin: 1.858736059%;
+  padding: 20px 0;
+  text-align: center;
+  width: 29.615861214%;
+}
+br {
+  clear: both; // This can fix parent height 0
+}
+
+### The Clearfix Technique ###
+fix overflow: auto/hidden pitfall
+pseudo-element
+
+.box-set:before,
+.box-set:after {
+  content: "";
+  display: table;
+}
+.box-set:after {
+  clear: both;
+}
+.box-set {
+  *zoom: 1;
+}
+
+### Position ###
+
+<div class="box-set">
+  <figure class="box box-1">Box 1</figure>
+  <figure class="box box-2">Box 2</figure>
+  <figure class="box box-3">Box 3</figure>
+  <figure class="box box-4">Box 4</figure>
+</div>
+
+.box-set {
+  background: #eaeaed;
+}
+.box {
+  background: #2db34a;
+  height: 80px;
+  width: 80px;
+}
+static position: default
+
+relative position: 
+  keep static position while setting box-offset: top left right bottom
+  if left, right given, priority is given in the direction in which the language is written.
+
+absolute position:
+  removed from normal flow
+  position related to parent relative, absolute position or body if none parents are found.
+  if no width/height specified, use left and top for width or width-left-right, height-top-bottom
+
+fixed position:
+<div class="box-set">
+  <figure class="box box-1">Box 1</figure>
+  <figure class="box box-2">Box 2</figure>
+  <figure class="box box-3">Box 3</figure>
+  <figure class="box box-4">Box 4</figure>
+</div>
+
+.box {
+  background: #2db34a;
+  height: 80px;
+  position: fixed;
+  width: 80px;
+}
+.box-1 {
+  top: 6%;
+  left: 2%;
+}
+.box-2 {
+  top: 0;
+  right: -40px;
+}
+.box-3 {
+  bottom: -10px;
+  right: 20px;
+}
+.box-4 {
+  bottom: 0;
+}
+
+### Z-Index Property ###
+.box-set {
+  background: #eaeaed;
+  height: 160px;
+  position: relative;
+}
+.box {
+  background: #2db34a;
+  border: 2px solid #ff7b29;
+  position: absolute;
+}
+.box-1 {
+  left: 10px;
+  top: 10px;
+}
+.box-2 {
+  bottom: 10px;
+  left: 70px;
+  z-index: 3;
+}
+.box-3 {
+  left: 130px;
+  top: 10px;
+  z-index: 2;
+}
+.box-4 {
+  bottom: 10px;
+  left: 190px;
+  z-index: 1;
+}
+
+### Complex selectors ###
+
+#### Descendant Selector ####
+article h2 {...}
+
+#### Direct selector ####
+article > p { color: red; }
+<article>
+  <p>
+    p1(red)
+  </p>
+  <div>
+    <p>
+      p2(black)
+    </p>
+  </div>
+</article>
+
+#### General Sibling Selector ####
+h2 ~ p {...}
+
+<p>...</p>
+<section>
+  <p>...</p>
+  <h2>...</h2>
+  <p>This paragraph will be selected</p>
+  <div>
+    <p>...</p>
+  </div>
+  <p>This paragraph will be selected</p>
+</section>
+
+#### Adjacent Sibling Selector ####
+h2 + p {...}
+
+<p>...</p>
+<section>
+  <p>...</p>
+  <h2>...</h2>
+  <p>This paragraph will be selected</p>
+  <div>
+    <p>...</p>
+  </div>
+  <p>...</p>
+</section>
+
+### Attribute Selectors ###
+#### Attribute Present Selector ####
+a[target] {...}
+<a href="#" target="_blank">...</a>
+
+#### Attribute Equals Selector ####
+a[href="http://google.com/"] {...}
+<a href="http://google.com/">...</a>
+
+#### Attribute Contains Selector ####
+a[href*="login"] {...}
+<a href="/login.php">...</a>
+
+#### Attribute Begins With Selector ####
+a[href^="login"] {...}
+<a href="/login.php">...</a>
+
+#### Attribute Ends With Selector ####
+a[href$=".pdf"] {...}
+<a href="/docs/menu.pdf">...</a>
+
+#### Attribute Spaced Selector ####
+a[rel~="tag"] {...}
+<a href="#" rel="tag nofollow">...</a>
+
+#### Attribute Hyphenated Selector ####
+a[lang|="en"] {...}
+<a href="#" lang="en-US">...</a>
+
+### Pseudo-classes ###
+
+#### Link Pseudo-classes ####
+   a:link link has been visited
+a:visited link hasn't been visited
+
+#### User Action Pseudo-classes ####
+ a:hover {...} // hovered
+a:active {...} // engaging such as clicking
+ a:focus {...} // make the element focus page
+
+#### User Interface State Pseudo-classes ####
+ input:enabled {...}  // default
+ input:disabled {...} // disabled
+
+  input:checked {...} // checkbox checked
+  input:indeterminate {...} // nor check or checked
+
+#### Structural & Position Pseudo-classes ####
+li:first-child {...}
+li:last-child {...}
+div:only-child {...}
+
+<ul>
+  <li>This list item will be selected</li>
+  <li>
+    <div>This div will be selected</div>
+  </li>
+  <li>
+    <div>...</div>
+    <div>...</div>
+  </li>
+  <li>This list item will be selected</li>
+</ul>
+
+#### :first-of-type, :last-of-type, & :only-of-type ####
+p:first-of-type {...}
+p:last-of-type {...}
+img:only-of-type {...}
+
+<article>
+  <h1>...</h1>
+  <p>This paragraph will be selected</p>
+  <p>...</p>
+  <img src="#"><!-- This image will be selected -->
+  <p>This paragraph will be selected</p>
+  <h6>...</h6>
+</article>
+
+#### :nth-child(n) & :nth-last-child(n) ####
+li:nth-child(3n) {...}
+
+<ul>
+  <li>...</li>
+  <li>...</li>
+  <li>This list item will be selected</li>
+  <li>...</li>
+  <li>...</li>
+  <li>This list item will be selected</li>
+</ul>
+
+li:nth-child(2n+3) {...}
+<ul>
+  <li>...</li>
+  <li>...</li>
+  <li>This list item will be selected</li>
+  <li>...</li>
+  <li>This list item will be selected</li>
+  <li>...</li>
+</ul>
+
+li:nth-child(-n+4) {...}
+
+<ul>
+  <li>This list item will be selected</li>
+  <li>This list item will be selected</li>
+  <li>This list item will be selected</li>
+  <li>This list item will be selected</li>
+  <li>...</li>
+  <li>...</li>
+</ul>
+
+p:nth-of-type(3n) {...}
+
+<article>
+  <h1>...</h1>
+  <p>...</p>
+  <p>...</p>
+  <p>This paragraph will be selected</p>
+  <h2>...</h2>
+  <p>...</p>
+  <p>...</p>
+  <p>This paragraph will be selected</p>
+</article>
+
+http://example.com/index.html#hello  stackoverflow
+section:target {...}
+<section id="hello">...</section>
+
+div:empty {...}
+
+<div>Hello</div>
+<div><!-- Coming soon --></div><!-- This div will be selected -->
+<div></div><!-- This div will be selected -->
+<div> </div>
+<div><strong></strong></div>
+
+div:not(.awesome) {...}
+:not(div) {...}
+
+<div>This div will be selected</div>
+<div class="awesome">...</div>
+<section>This section will be selected</section>
+<section class="awesome">This section will be selected</section>
+
+
+.alpha:first-letter,
+.bravo:first-line {
+  color: #ff7b29;
+  font-size: 18px;
+}
+<p class="alpha">Lorem ipsum dolor...</p>
+<p class="bravo">Integer eget enim...</p>
+
+
+a:after {
+  color: #9799a7;
+  content: " (" attr(href) ")";
+  font-size: 11px;
+}
+<a href="http://google.com/">Search the Web</a>
+<a href="http://learn.shayhowe.com/">Learn How to Build Websites</a>
+
+::-moz-selection {
+    background: #ff7b29;
+}
+::selection {  // pseudo-elements in css must start with ::
+  background: #ff7b29;
+}
+
+Flexible Grid
+target ÷ context = result
+section,
+aside {
+  margin: 1.858736059%; /*  10px ÷ 538px = .018587361 */
+}
+section {
+  float: left;
+  width: 63.197026%;    /* 340px ÷ 538px = .63197026 */   
+}
+aside {
+  float: right;
+  width: 29.3680297%;  /* 158px ÷ 538px = .293680297 */
+}
+
+#### Media Queries ####
+/* @media Rule */
+@media all and (max-width: 1024px) {...}
+
+/* @import Rule */
+@import url(styles.css) all and (max-width: 1024px) {...}
+
+@media all and (min-width: 800px) and (max-width: 1024px) {...}
+
+@media not screen and (color) {...}
+
+@media only screen and (orientation: portrait) {...}
+
+@media all and (min-width: 320px) and (max-width: 780px) {...}
+
+@media all and (min-device-aspect-ratio: 16/9) {...}
+
+@media all and (max-width: 420px) { // When width smaller than 420px
+  section, aside {
+    float: none;
+    width: auto;
+  }
+}
+
+@media screen and (min-width: 400px)  {...}
+@media screen and (min-width: 600px)  {...}
+@media screen and (min-width: 1000px) {...}
+@media screen and (min-width: 1400px) {...}
+
+<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="initial-scale=2">
+<meta name="viewport" content="minimum-scale=0">
+<meta name="viewport" content="user-scalable=yes">
+
+@extend .alert
+
+
+$();
+jQuery();
+
+$(document).ready(function(event){ 
+  // jQuery code 
+});
+
+$('.feature');           // Class selector
+$('li strong');          // Descendant selector
+$('em, i');              // Multiple selector
+$('a[target="_blank"]'); // Attribute selector
+$('p:nth-child(2)');     // Pseudo-class selector
+
+$('div').click(function(event){ 
+  $(this);
+});
+
+$('div:has(strong)');
+
+$('div').not('.type, .collection').parent();
+
+// Gets the value of the alt attribute
+$('img').attr('alt');
+
+// Sets the value of the alt attribute
+$('img').attr('alt', 'Wild kangaroo');
+
+
+$('li:even').addClass('even-item');
+$('p').removeClass();
+$('abbr').attr('title', 'Hello World');
+
+$('h1 span').css('font-size', 'normal');
+$('div').css({
+  fontSize: '13px', 
+  background: '#f60'
+});
+$('header').height(200);
+$('.extend').height(30 + 'em');
+
+$('section').prepend('<h3>Featured</h3>');
+$('a[target="_blank"]').after('<em>New window.</em>');
+$('h1').text('Hello World');
+
+$('li').click(function(event){
+  $(this).addClass('saved-item');
+});
+
+
+$('li').on('click', function(event){
+  $(this).addClass('saved-item');
+});
+
+
+$('.pagination').on('hover', function(event){
+  $('a#up').click();
+});
+
